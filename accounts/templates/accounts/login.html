@@ -1,0 +1,26 @@
+{% extends 'base.html' %} {% block content %} {% load staticfiles %} {% if error %} {{ error }}
+<br />
+<br />
+{% endif %}
+
+<div class="container primary py-2">
+  <h1>Login</h1>
+  <br />
+  <form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+    <div class="form-group">
+      <label for="username">Username</label>
+      <input type="text" class="form-control col-md-3" name="username" placeholder="Your username" id="username" required />
+    </div>
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" class="form-control col-md-3" name="password" placeholder="Your password" id="password" required />
+    </div>
+    <input type="submit" value="Login" />
+  </form>
+  <div class="py-2">
+    New user:
+    <a href="{% url 'sign_up' %}">Sign Up!</a>
+  </div>
+</div>
+{% endblock %}

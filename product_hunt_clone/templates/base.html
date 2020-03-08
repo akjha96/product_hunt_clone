@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% load staticfiles %}
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors" />
+    <meta name="generator" content="Jekyll v3.8.6" />
+    <title>{{ blog.heading }}</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/album/" />
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+
+    <!-- Favicons -->
+    <link rel="icon" href="{% static 'favicon.ico' %}" />
+
+    <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml" />
+    <meta name="theme-color" content="#563d7c" />
+    <script src="https://kit.fontawesome.com/440c4dadc2.js" crossorigin="anonymous"></script>
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="{% url 'home'%}"><img src="{% static 'logo.png' %}" width="12%" alt="Product hunt clone" /> Product Hunt Clone</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav ml-auto">
+              <div class="row mx-md-n5">
+                <div class="px-2">
+                  <a class="nav-item nav-link border border-light rounded" href="{% url 'home'%}"><i class="fa fa-home"></i> Home <span class="sr-only">(current)</span></a>
+                </div>
+                {% if user.is_authenticated %}
+                <div class="px-2">
+                  <a class="nav-item nav-link border border-light rounded" href="{% url 'create' %}"><i class="far fa-plus-square"></i> Product <span class="sr-only">(current)</span></a>
+                </div>
+                <div class="px-2">
+                  <a class="nav-item nav-link border border-light rounded" href="javascript:{document.getElementById('logout').submit()}"><i class="fa fa-sign-out-alt"></i> Logout</a>
+                </div>
+                <form id="logout" action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <input type="hidden" name="logout" />
+                </form>
+                {% else %}
+                <div class="px-2">
+                  <a class="nav-item nav-link border border-light rounded" href="{% url 'sign_up'%}"><i class="fa fa-user-plus"></i> Sign Up</a>
+                </div>
+                <div class="px-2">
+                  <a class="nav-item nav-link border border-light rounded" href="{% url 'login'%}"><i class="fa fa-sign-in"></i> Login</a>
+                </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <br />
+    <div class="container">
+      {% block content %} {% endblock %}
+    </div>
+    <br />
+    <div class="container text-center">
+      <a href="#">Back to top</a>
+      <br />
+    </div>
+    <footer class="text-muted">
+      <div class="container text-center">
+        <p>Happy shopping {% now "Y" %}</p>
+      </div>
+    </footer>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>

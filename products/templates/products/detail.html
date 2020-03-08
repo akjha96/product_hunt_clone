@@ -1,0 +1,45 @@
+{% extends 'base.html' %} {% block content %} {% load staticfiles %} {% csrf_token %}
+
+<div class="row pt-2">
+  <div class="col-2">
+    <img src="{{ product.icon.url }}" alt="icon image" class="img-thumbnail rounded img-fluid" />
+  </div>
+  <div class="col-10">
+    <div class="row">
+      <div class="col-6">
+        <a href="{{ product.url }}" target="blank"><h1>{{ product.title }}</h1></a>
+      </div>
+      <div class="col-6"></div>
+    </div>
+  </div>
+</div>
+<br />
+<div class="row pt-2">
+  <div class="col-8">
+    <img src="{{ product.image.url }}" width="500" alt="icon image" class="img-fluid rounded" />
+  </div>
+  <div class="col-4 text-center">
+    <a href="javascript:{document.getElementById('upvote').submit()}">
+      <button name="upvote" class="btn btn-danger btn-lg btn-block"><i class="fa fa-thumbs-up"></i> Upvote {{ product.votes_total }}</button>
+    </a>
+  </div>
+</div>
+<form method="POST" id="upvote" action="{% url 'upvote' product.id %}">
+  {% csrf_token %}
+  <input type="hidden" />
+</form>
+
+<br />
+<div class="row pt-2">
+  <div class="col-8">
+    <h4 class="float-left"><i class="fas fa-search-location"></i> Hunted By: {{ product.hunter }}</h4>
+    <h4 class="float-right"><i class="fa fa-clock"></i> {{ product.pub_date_pretty }}</h4>
+  </div>
+</div>
+<div class="row pt-2">
+  <div class="col-8">
+    {{ product.description }}
+    <br />
+  </div>
+</div>
+{% endblock %}
